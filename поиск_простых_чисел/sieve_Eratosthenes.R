@@ -1,28 +1,29 @@
 
 start_time <- proc.time()
-  
-  n <- 100000000
-  n <- as.integer(n)
-  if(n > 1e8){
-    stop("слишком большой аргумент")
-  }
-  # булева матрица
-  mat <- rep(T, n)
-  # число 1 не простое
-  mat[1] <- F
-  # последнее простое число
-  last <- 2L
-  # округленный в большую сторону квадратный корень из n
-  fsqr <- floor(sqrt(n))
-  
-  while (last <= fsqr)
-  {
-    mat[seq.int(2L*last, n, last)] <- F
-    sel <- which(mat[(last+1):(fsqr+1)])
-    if(any(sel)){
-      last <- last + min(sel)
-    }else last <- fsqr+1
-  }
-  mat <- which(mat) 
-  
+
+# РїСЂРѕРІРµСЂРєР° С‡РёСЃРµР» РЅР° РїСЂРѕСЃС‚РѕС‚Сѓ:
+n <- 100000000
+n <- as.integer(n)
+if(n > 1e8){
+  stop("СЃР»РёС€РєРѕРј Р±РѕР»СЊС€РѕР№ Р°СЂРіСѓРјРµРЅС‚")
+}
+# Р±СѓР»РµРІР° РјР°С‚СЂРёС†Р°
+mat <- rep(T, n)
+# С‡РёСЃР»Рѕ 1 РЅРµ РїСЂРѕСЃС‚РѕРµ
+mat[1] <- F
+# РїРѕСЃР»РµРґРЅРµРµ РїСЂРѕСЃС‚РѕРµ С‡РёСЃР»Рѕ
+last <- 2L
+# РѕРєСЂСѓРіР»РµРЅРЅС‹Р№ РІ Р±РѕР»СЊС€СѓСЋ СЃС‚РѕСЂРѕРЅСѓ РєРІР°РґСЂР°С‚РЅС‹Р№ РєРѕСЂРµРЅСЊ РёР· n
+fsqr <- floor(sqrt(n))
+
+while (last <= fsqr)
+{
+  mat[seq.int(2L*last, n, last)] <- F
+  sel <- which(mat[(last+1):(fsqr+1)])
+  if(any(sel)){
+    last <- last + min(sel)
+  }else last <- fsqr+1
+}
+mat <- which(mat) 
+
 proc.time() - start_time
